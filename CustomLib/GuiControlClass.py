@@ -289,7 +289,7 @@ class MainFrame(gui.MainFrame):
             self.OnButtonClick_select_file(wx.PostEvent)
         else:
             n = self.m_ComboBox_ExportFormat.GetCurrentSelection()
-            ExportFormat = self.m_ComboBox_CbarManualMag.GetString(n)
+            ExportFormat = self.m_ComboBox_ExportFormat.GetString(n)
             self.Plot.ExportFormat = ExportFormat
 
     def On_CHKBox_FlipX(self, event):
