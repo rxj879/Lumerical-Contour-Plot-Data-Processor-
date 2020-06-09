@@ -15,8 +15,9 @@ Install packages needed do:
 --> pip install -U wxPython
 ---------------------
 
-1) Simply export the data into a text format. 
+1) In Lumerical, simply export the E-field or H-field data into a text format. 
 2) Open the script "main.py" in your IDE such as spyder. 
-3) run the program, then navigate dialogue window and select the file
+3) run the program --> press select file --> then navigate dialogue window and select the file
 4) Review plot and set contour plot options accordingly in the gui
+5) Export plot in chosen file format
 
