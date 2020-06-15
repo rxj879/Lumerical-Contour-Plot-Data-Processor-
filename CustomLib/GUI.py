@@ -22,7 +22,8 @@ from CustomLib.Funcs import(LengthUnitArray,
                             CbarManualMag_Array,
                             ExportFormat_Array,
                             Cbar_ColourMapArray,
-                            Cbar_ReverseArray)
+                            Cbar_ReverseArray,
+                            ExportDPI_Array)
 
 ###########################################################################
 ## Class MainFrame
@@ -56,12 +57,13 @@ class MainFrame ( wx.Frame ):
         bSizer1 = wx.BoxSizer( wx.VERTICAL )
        
         bSizer10 = wx.BoxSizer( wx.VERTICAL )
-        gSizer10 = wx.GridSizer( 0, 4, 0, 0 )
+        gSizer10 = wx.GridSizer( 0, 5, 0, 0 )
         
         bSizer11 = wx.BoxSizer( wx.VERTICAL )
         bSizer12 = wx.BoxSizer( wx.VERTICAL )
         bSizer13 = wx.BoxSizer( wx.VERTICAL )
         bSizer14 = wx.BoxSizer( wx.VERTICAL )
+        bSizer15 = wx.BoxSizer( wx.VERTICAL )
         
         bSizer20 = wx.BoxSizer( wx.VERTICAL )
         gSizer20 = wx.GridSizer( 0, 4, 0, 0 )
@@ -88,7 +90,7 @@ class MainFrame ( wx.Frame ):
         self.m_staticText_FILE = wx.StaticText( self, wx.ID_ANY, u"Spectra File", wx.DefaultPosition, wx.DefaultSize, 0 )
         self.m_staticText_FILE.Wrap( -1 )
                      
-        self.m_textCtrl_FILE = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, (450, -1), 0 )
+        self.m_textCtrl_FILE = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, (350, -1), 0 )
               
         self.m_button_select_file = wx.Button( self, wx.ID_ANY, u"Select File", wx.DefaultPosition, wx.DefaultSize, 0 )
         
@@ -101,6 +103,14 @@ class MainFrame ( wx.Frame ):
         
         self.m_ComboBox_ExportFormat = wx.ComboBox(self, wx.ID_ANY, "Export File Format", wx.DefaultPosition,
                                              (150,-1), ExportFormat_List , 0)
+        
+        self.m_staticText_ExportDPI = wx.StaticText( self, wx.ID_ANY, u"Export Resolution", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText_ExportFormat.Wrap( -1 )
+        
+        ExportDPI_List = ExportDPI_Array()
+        
+        self.m_ComboBox_ExportDPI = wx.ComboBox(self, wx.ID_ANY, "Export Res", wx.DefaultPosition,
+                                             (150,-1), ExportDPI_List , 0)
         
         self.m_button_ExportFig = wx.Button( self, wx.ID_ANY, u"Export Figure", wx.DefaultPosition, wx.DefaultSize, 0 )
         
@@ -127,14 +137,18 @@ class MainFrame ( wx.Frame ):
         bSizer13.Add( self.m_button_ExportFig, 0, wx.ALL, 5 )
         
         gSizer10.Add( bSizer13, 0, wx.ALL,5 )
-
         
-        bSizer14.Add( self.m_button_SavePrefs, 0, wx.ALL, 5 )
-        bSizer14.Add( self.m_button_LoadPrefs, 0, wx.ALL, 5 )
-        bSizer14.Add( self.m_button_RestorePrefs, 0, wx.ALL, 5 )        
+        bSizer14.Add( self.m_staticText_ExportDPI, 0, wx.ALL, 5 )
+        bSizer14.Add( self.m_ComboBox_ExportDPI, 0, wx.ALL, 5 )
+        
+        gSizer10.Add( bSizer14, 0, wx.ALL,5 )
+        
+        bSizer15.Add( self.m_button_SavePrefs, 0, wx.ALL, 5 )
+        bSizer15.Add( self.m_button_LoadPrefs, 0, wx.ALL, 5 )
+        bSizer15.Add( self.m_button_RestorePrefs, 0, wx.ALL, 5 )        
         
        
-        gSizer10.Add( bSizer14, 0, wx.ALL,5 )
+        gSizer10.Add( bSizer15, 0, wx.ALL,5 )
 
         
         bSizer10.Add( gSizer10, 1, wx.EXPAND, 5 )
@@ -475,6 +489,7 @@ class MainFrame ( wx.Frame ):
         self.m_ComboBox_CbarManualMag.Bind(wx.EVT_COMBOBOX, self.OnComboBoxSelect_CbarManualMag)
         
         self.m_ComboBox_ExportFormat.Bind(wx.EVT_COMBOBOX, self.OnComboBoxSelect_ExportFormat)
+        self.m_ComboBox_ExportDPI.Bind(wx.EVT_COMBOBOX, self.OnComboBoxSelect_ExportDPI)
         self.m_button_ExportFig.Bind( wx.EVT_BUTTON, self.OnButtonClick_ExportFig )
         self.m_button_SavePrefs.Bind( wx.EVT_BUTTON, self.OnButtonClick_SavePrefs )
         self.m_button_LoadPrefs.Bind( wx.EVT_BUTTON, self.OnButtonClick_LoadPrefs )
@@ -488,7 +503,8 @@ class MainFrame ( wx.Frame ):
 ################################################################        
 	# Virtual event handlers, overide them in your derived class
 
-
+    def OnComboBoxSelect_ExportDPI(self, event):
+        event.Skip()
 
     def On_CHKBox_FlipX(self, event):
         event.Skip()

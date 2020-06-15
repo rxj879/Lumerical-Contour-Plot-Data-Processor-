@@ -45,6 +45,10 @@ class Contour_Plot:
         self.X_lim = []
         
         self.Y_lim = []
+        
+        self.X_lim2Plot = []
+        
+        self.Y_lim2Plot = []
             
         self.x_label = "x"
             
@@ -80,6 +84,8 @@ class Contour_Plot:
         self.MEDIUM_SIZE = 25
         self.BIGGER_SIZE = 30
         # Define three font sizes
+        
+        self.ExportDPI = 300
     
 
             
@@ -131,10 +137,7 @@ class Contour_Plot:
             X, Y = RescaleAxis(X, Y, self.Axis_Units)
             # Rescale X and Y accord to the user input
             
-        if self.Axis_Units == '$\mu$m':
-            self.X_lim = [i /1000.0 for i in self.X_lim]
-        
-            self.Y_lim = [i /1000.0 for i in self.Y_lim]
+
     
         Z = np.transpose(self.Mode_Data.Plane_Data)
         # transpose gridded the scalar data to fit the coordinate grid data
@@ -150,7 +153,15 @@ class Contour_Plot:
             
         self.Y_lim  =  AxisLimitTune(Y, self.Y_lim)
     
-    
+        if self.Axis_Units == '$\mu$m':
+            self.X_lim2Plot = [i /1000.0 for i in self.X_lim]
+        
+            self.Y_lim2Plot = [i /1000.0 for i in self.Y_lim]
+            
+        elif self.Axis_Units == 'nm':
+            self.X_lim2Plot =  self.X_lim
+        
+            self.Y_lim2Plot =  self.Y_lim
     
         self.Cbar_lim=  AxisLimitTune(Z, self.Cbar_lim)
     
@@ -167,20 +178,20 @@ class Contour_Plot:
         ax.set_xlabel(self.x_label + " ("+self.Axis_Units+")")
         # Set label of the x-axis
     
-        plt.xticks(np.linspace(self.X_lim[0],self.X_lim[1],self.Num_X_Ticks))
+        plt.xticks(np.linspace(self.X_lim2Plot[0],self.X_lim2Plot[1],self.Num_X_Ticks))
         # Set the minimum, maximum and number of the x ticks
     
         ax.set_ylabel(self.y_label + " ("+self.Axis_Units+")", labelpad = 3)
         # Set the label of the y-axis and add some space between it and the axis
     
-        plt.yticks(np.linspace(self.Y_lim[0],self.Y_lim[1],self.Num_Y_Ticks))
+        plt.yticks(np.linspace(self.Y_lim2Plot[0],self.Y_lim2Plot[1],self.Num_Y_Ticks))
         # Set the minimum, maximum and number of the y ticks
     
         ax.tick_params(axis='both', which='major', pad=8)
         # Addition axis tick modifications
     
-        plt.xlim((self.X_lim))
-        plt.ylim((self.Y_lim))
+        plt.xlim((self.X_lim2Plot))
+        plt.ylim((self.Y_lim2Plot))
         # Set the limits of the x and y axes in 
     
         cmap = plt.get_cmap(self.Cbar_ColourMap )
@@ -238,7 +249,7 @@ class Contour_Plot:
         path = self.Mode_Data.Idir +'/'+ self.Mode_Data.File_Name +'.' + self.ExportFormat
         #Define the path with name of the file to be saved
     
-        self.fig.savefig(path,  bbox_inches = 'tight', dpi=600, format = self.ExportFormat)
+        self.fig.savefig(path,  bbox_inches = 'tight', dpi=self.ExportDPI, format = self.ExportFormat)
         # Save figure with specified resolution in dpi
     
         print('Plot saved to: ' , path)
@@ -251,6 +262,8 @@ class Contour_Plot:
         File = "Plot_prefs.pickle"
         pickle.dump([self.X_lim,
                      self.Y_lim ,
+                     self.X_lim2Plot,
+                     self.Y_lim2Plot,
                      self.x_label ,
                      self.y_label ,
                      self.Num_Y_Ticks,
@@ -268,7 +281,8 @@ class Contour_Plot:
                      self.ExportFormat ,
                      self.SMALL_SIZE ,
                      self.MEDIUM_SIZE,
-                     self.BIGGER_SIZE ], open(File, "wb"))
+                     self.BIGGER_SIZE,
+                     self.ExportDPI], open(File, "wb"))
 
         print("Plot preferences saved.")
                 
@@ -279,6 +293,8 @@ class Contour_Plot:
         File = "Plot_prefs.pickle"
         (self.X_lim,
          self.Y_lim ,
+         self.X_lim2Plot,
+         self.Y_lim2Plot,
          self.x_label ,
          self.y_label ,
          self.Num_Y_Ticks,
@@ -296,7 +312,8 @@ class Contour_Plot:
          self.ExportFormat ,
          self.SMALL_SIZE ,
          self.MEDIUM_SIZE,
-         self.BIGGER_SIZE)= pickle.load(open(File, "rb"))
+         self.BIGGER_SIZE,
+         self.ExportDPI)= pickle.load(open(File, "rb"))
 
     def CheckandLoad_Spectra_Prefs(self):
         try:

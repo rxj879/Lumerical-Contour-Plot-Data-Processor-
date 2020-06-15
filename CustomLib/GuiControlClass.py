@@ -99,6 +99,9 @@ class MainFrame(gui.MainFrame):
         """ Export the figure taking the chosen file type"""
         if self.Plot != None:
             self.Plot.Save_Fig()
+            
+
+
 
 ######################################
         
@@ -244,18 +247,19 @@ class MainFrame(gui.MainFrame):
     def OnComboBoxSelect_AxisUnits (self, event):
         """ set axis units"""
         if self.Plot == None:
-            self.OnButtonClick_select_file(wx.PostEvent)
+            self.OnButtonClick_select_file(event)
         else:
             n = self.m_ComboBox_AxisUnits.GetCurrentSelection()
             AxisUnitsString = self.m_ComboBox_AxisUnits.GetString(n)
             AxisUnits = AxisUnitsConvert(AxisUnitsString)
             self.Plot.Axis_Units = AxisUnits
+
             self.MakePlot()
 
     def OnComboBoxSelect_Cbar_Label(self, event):
         """ select colour label preset options"""
         if self.Plot == None:
-            self.OnButtonClick_select_file(wx.PostEvent)
+            self.OnButtonClick_select_file(event)
         else:
             n = self.m_ComboBox_Cbar_Label.GetCurrentSelection()
             Cbar_LabelString = self.m_ComboBox_Cbar_Label.GetString(n)
@@ -267,7 +271,7 @@ class MainFrame(gui.MainFrame):
     def OnTextCtrl_ManualCbar(self, event):
         """ apply a manual colour bar label"""
         if self.Plot == None:
-            self.OnButtonClick_select_file(wx.PostEvent)
+            self.OnButtonClick_select_file(event)
         else:
             NewCbarLabel = self.m_textCtrl_ManualCbar_label.GetValue()
             self.Plot.Cbar_label = NewCbarLabel
@@ -276,7 +280,7 @@ class MainFrame(gui.MainFrame):
     def OnComboBoxSelect_CbarManualMag(self, event):
         """ Apply a magnitude defined multiplication factor to the colour bar scale"""
         if self.Plot == None:
-            self.OnButtonClick_select_file(wx.PostEvent)
+            self.OnButtonClick_select_file(event)
         else:
             n = self.m_ComboBox_CbarManualMag.GetCurrentSelection()
             CbarManualMag = self.m_ComboBox_CbarManualMag.GetString(n)
@@ -286,16 +290,25 @@ class MainFrame(gui.MainFrame):
     def OnComboBoxSelect_ExportFormat(self, event):
         """ Set the export figure format"""
         if self.Plot == None:
-            self.OnButtonClick_select_file(wx.PostEvent)
+            self.OnButtonClick_select_file(event)
         else:
             n = self.m_ComboBox_ExportFormat.GetCurrentSelection()
             ExportFormat = self.m_ComboBox_ExportFormat.GetString(n)
             self.Plot.ExportFormat = ExportFormat
-
+            
+    def OnComboBoxSelect_ExportDPI(self, event):
+        """Choose export figure export resolution"""
+        if self.Plot == None:
+            self.OnButtonClick_select_file(event)
+        else:
+            n = self.m_ComboBox_ExportDPI.GetCurrentSelection()
+            ExportDPI = self.m_ComboBox_ExportDPI.GetString(n)
+            self.Plot.ExportDPI = int(ExportDPI)
+            
     def On_CHKBox_FlipX(self, event):
         """ Check box to refelct plot data in x direction"""
         if self.Plot == None:
-            self.OnButtonClick_select_file(wx.PostEvent)
+            self.OnButtonClick_select_file(event)
         else:
             self.Plot.FlipX = self.m_CHKBox_FlipX.GetValue()
             self.MakePlot()
@@ -303,7 +316,7 @@ class MainFrame(gui.MainFrame):
     def On_CHKBox_FlipY(self, event):
         """ check box to refect in y direction"""
         if self.Plot == None:
-            self.OnButtonClick_select_file(wx.PostEvent)
+            self.OnButtonClick_select_file(event)
         else:
             self.Plot.FlipY = self.m_CHKBox_FlipY.GetValue()
             self.MakePlot()

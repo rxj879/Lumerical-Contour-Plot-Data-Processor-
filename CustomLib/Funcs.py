@@ -250,6 +250,11 @@ def AxisLabel_Array():
     AxisLabels = ["x", "y", "z"]
     return AxisLabels
 
+def ExportDPI_Array():
+    """ export dpi options"""
+    ExportDPI = ["150", "200", "300", "400", "500", "600"]
+    return ExportDPI
+
 def CbarLabel_Array():
     """predefined colourbar label options"""
     CbarLabel_List = ['E-field (V/m)',
