@@ -6,11 +6,18 @@ This set of scripts will help those wishing to plot mode data from Lumerical.
 When you export data from a lumerical monitor such as the electric field
 strength in a plane it can be quite labourious to process this in standard 
 plotting software as a contour plot.
+---------------------
+Known Troubleshoot:
 
+If error occurs (ValueError: not enough values to unpack). 
+Delete the prefs.pickle file. it's is with the main.py file
+Or: press "Restore Default Prefs"
 ---------------------
 To get this working on a fresh python install:
 
 Install packages needed do:
+
+--> pip install -U matplotlib
 
 --> pip install -U wxPython
 ---------------------
