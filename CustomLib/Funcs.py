@@ -282,7 +282,7 @@ def Cbar_ReverseArray():
     
 def ExportFormat_Array():
     """ Export file format options"""
-    ExportFormat_List = ['png', 'svg', 'eps']
+    ExportFormat_List = ['png', 'svg', 'eps', 'pdf']
     return ExportFormat_List
 
 def RescaleAxis(X, Y, Axis_Units):

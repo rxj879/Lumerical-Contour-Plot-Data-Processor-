@@ -80,9 +80,9 @@ class Contour_Plot:
             
         self.ExportFormat = 'png'
             
-        self.SMALL_SIZE  = 22
-        self.MEDIUM_SIZE = 25
-        self.BIGGER_SIZE = 30
+        self.SMALL_SIZE  = 10
+        self.MEDIUM_SIZE = 12
+        self.BIGGER_SIZE = 14
         # Define three font sizes
         
         self.ExportDPI = 300
@@ -91,7 +91,7 @@ class Contour_Plot:
             
     def MakePlot(self):
             
-        self.fig = plt.figure(figsize = (12,5))
+        self.fig = plt.figure(figsize = (2.6,2.0))
         # Create a blank figure with the specificed width and height
         
         plt.rcParams['font.family'] = "sans-serif"
@@ -168,11 +168,11 @@ class Contour_Plot:
         plt.gca().set_aspect('equal', adjustable='box')
         # Sets the aspect ratio of the x and y axis to be equal - no scale scew
        
-        ax.tick_params(direction='out', length=6, width=2, colors='k',
+        ax.tick_params(direction='out', length=3, width=1, colors='k',
                            grid_color='k', grid_alpha=0.5)
         # modify the axis ticks
     
-        plt.rcParams['axes.linewidth'] = 2 
+        plt.rcParams['axes.linewidth'] = 1 
         #set the value of the figure linwidth globally
 
         ax.set_xlabel(self.x_label + " ("+self.Axis_Units+")")
@@ -181,13 +181,13 @@ class Contour_Plot:
         plt.xticks(np.linspace(self.X_lim2Plot[0],self.X_lim2Plot[1],self.Num_X_Ticks))
         # Set the minimum, maximum and number of the x ticks
     
-        ax.set_ylabel(self.y_label + " ("+self.Axis_Units+")", labelpad = 3)
+        ax.set_ylabel(self.y_label + " ("+self.Axis_Units+")", labelpad = 0)
         # Set the label of the y-axis and add some space between it and the axis
     
         plt.yticks(np.linspace(self.Y_lim2Plot[0],self.Y_lim2Plot[1],self.Num_Y_Ticks))
         # Set the minimum, maximum and number of the y ticks
     
-        ax.tick_params(axis='both', which='major', pad=8)
+        ax.tick_params(axis='both', which='major', pad=4)
         # Addition axis tick modifications
     
         plt.xlim((self.X_lim2Plot))
@@ -227,8 +227,8 @@ class Contour_Plot:
         # Adjust tick spacing of our colurbar. the commented "extend" option is for 
         #an extended bar arrow. See documentation for detail and uncomment as required.
     
-        cb.set_label(self.Cbar_label , labelpad=10)
-        cb.ax.tick_params(labelsize=self.MEDIUM_SIZE)
+        cb.set_label(self.Cbar_label , labelpad=7)
+        cb.ax.tick_params(labelsize=self.MEDIUM_SIZE, width = 1)
         # Add a colourbar label
     
         plt.clim(self.Cbar_lim)
