@@ -80,9 +80,9 @@ class Contour_Plot:
             
         self.ExportFormat = 'png'
             
-        self.SMALL_SIZE  = 10
-        self.MEDIUM_SIZE = 12
-        self.BIGGER_SIZE = 14
+        self.SMALL_SIZE  = 8
+        self.MEDIUM_SIZE = 10
+        self.BIGGER_SIZE = 12
         # Define three font sizes
         
         self.ExportDPI = 300
@@ -91,7 +91,7 @@ class Contour_Plot:
             
     def MakePlot(self):
             
-        self.fig = plt.figure(figsize = (2.6,2.0))
+        self.fig = plt.figure(figsize = (2,1.5), dpi = 300)
         # Create a blank figure with the specificed width and height
         
         plt.rcParams['font.family'] = "sans-serif"
@@ -227,7 +227,7 @@ class Contour_Plot:
         # Adjust tick spacing of our colurbar. the commented "extend" option is for 
         #an extended bar arrow. See documentation for detail and uncomment as required.
     
-        cb.set_label(self.Cbar_label , labelpad=7)
+        cb.set_label(self.Cbar_label , labelpad=5)
         cb.ax.tick_params(labelsize=self.MEDIUM_SIZE, width = 1)
         # Add a colourbar label
     
@@ -259,7 +259,7 @@ class Contour_Plot:
         
 
         print("Saving Plot preferences...")
-        File = "Plot_prefs.pickle"
+        File = self.Mode_Data.Idir +'/'+ 'Plot_prefs.pickle'
         pickle.dump([self.X_lim,
                      self.Y_lim ,
                      self.X_lim2Plot,
@@ -290,7 +290,7 @@ class Contour_Plot:
     def load_Plot_prefs(self):
 
         print("Loading preferences...")
-        File = "Plot_prefs.pickle"
+        File = self.Mode_Data.Idir +'/'+ 'Plot_prefs.pickle'
         (self.X_lim,
          self.Y_lim ,
          self.X_lim2Plot,
