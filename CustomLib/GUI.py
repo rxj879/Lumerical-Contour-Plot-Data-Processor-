@@ -209,14 +209,14 @@ class MainFrame ( wx.Frame ):
         self.m_staticText_Cbar_Lowlim = wx.StaticText( self, wx.ID_ANY, u"Colour bar lower limit", wx.DefaultPosition, wx.DefaultSize, 0 )
         self.m_staticText_Cbar_Lowlim.Wrap( -1 )
         
-        self.m_SpinCtrl_CbarLowLimit = wx.SpinCtrl(self, wx.ID_ANY, "", wx.DefaultPosition,
+        self.m_SpinCtrl_CbarLowLimit = wx.SpinCtrlDouble(self, wx.ID_ANY, "", wx.DefaultPosition,
                                      (100,-1), wx.SP_ARROW_KEYS | wx.ALIGN_LEFT | wx.TE_PROCESS_ENTER, 
                                      min=-1000000, max=1000000, initial=0,  name="Colour bar lower limit")
 
         self.m_staticText_Cbar_Highlim = wx.StaticText( self, wx.ID_ANY, u"Colour bar upper limit", wx.DefaultPosition, wx.DefaultSize, 0 )
         self.m_staticText_Cbar_Highlim.Wrap( -1 )
         
-        self.m_SpinCtrl_CbarHighLimit = wx.SpinCtrl(self, wx.ID_ANY, "", wx.DefaultPosition,
+        self.m_SpinCtrl_CbarHighLimit = wx.SpinCtrlDouble(self, wx.ID_ANY, "", wx.DefaultPosition,
                                      (100,-1), wx.SP_ARROW_KEYS | wx.ALIGN_LEFT | wx.TE_PROCESS_ENTER, 
                                      min=-1000000, max=1000000, initial=0,  name="Colour bar upper limit")
         
